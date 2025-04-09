@@ -66,8 +66,8 @@ class Cliente{
 
         return "Nombre: " . $this->getNombre().
         "\nApellido: " . $this->getApellido().
-        "Estado de baja: " . $estadoBaja.
-        "Tipo de documento: " . $this->getTipoDocumento().
-        "Documento: " . $this->getDocumento();
+        "\nEstado de baja: " . $estadoBaja.
+        "\nTipo de documento: " . $this->getTipoDocumento().
+        "\nDocumento: " . $this->getDocumento();
     }
 }

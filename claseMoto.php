@@ -1,5 +1,8 @@
 <?php
 class Moto{
+    // propiedad modificable
+    public static $anio = 2025;
+
     //Atributos
     private int $codigo;
     private float $costo;
@@ -74,11 +77,28 @@ class Moto{
         "Esta disponible" : "NO esta disponible";
 
         return "INFORMACION DE LA MOTO\n".
-        "Codigo: " . $this->getCodigo().
-        "Costo: ". $this->getCosto().
-        "Año de fabricacion: ". $this->getAnioFabricacion().
-        "Descripción: ". $this->getDescripcion().
-        "Incremenro anual: ". $this->getIncrementoAnual().
-        "Activa: ". $disponibilidad;
+        "\nCodigo: " . $this->getCodigo().
+        "\nCosto: ". $this->getCosto().
+        "\nAño de fabricacion: ". $this->getAnioFabricacion().
+        "\nDescripción: ". $this->getDescripcion().
+        "\nIncremento anual: ". $this->getIncrementoAnual().
+        "\nActiva: ". $disponibilidad;
+    }
+    
+    //Cambiar de año si es necesario
+    public static function cambiarAnio($nuevoAnio) {
+        self::$anio = $nuevoAnio;
+    }
+
+    //Metodo para precio de moto
+    public function darPrecioVenta(){
+        $aniosTranscurridos = self::$anio-$this->getAnioFabricacion();
+        if($this->getActiva()==false){
+            $venta = 0;
+        }else{
+            $venta = $this->getCosto()+$this->getCosto()*
+            ($aniosTranscurridos*$this->getIncrementoAnual());
+        }
+        return $venta;
     }
 }
