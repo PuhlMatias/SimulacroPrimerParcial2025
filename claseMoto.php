@@ -9,7 +9,13 @@ class Moto{
     private bool $activa;
 
     //Metodo constructor
-    public function __construct(int $codigo,float $costo,int $anioFabricacion,string $descripcion,float $incrementoAnual,bool $activa)
+    public function __construct(
+        int $codigo,
+        float $costo,
+        int $anioFabricacion,
+        string $descripcion,
+        float $incrementoAnual,
+        bool $activa)
     {
         $this->codigo=$codigo;
         $this->costo=$costo;
@@ -63,7 +69,10 @@ class Moto{
     //Metodo toString
     public function __toString()
     {
-        $disponibilidad = $this->getActiva() ? "Esta disponible" : "NO esta disponible";
+        //Verificar si esta disponible
+        $disponibilidad = $this->getActiva() ? 
+        "Esta disponible" : "NO esta disponible";
+
         return "INFORMACION DE LA MOTO\n".
         "Codigo: " . $this->getCodigo().
         "Costo: ". $this->getCosto().

@@ -8,7 +8,12 @@ class Cliente{
     private int $documento;
 
     //Metodo constructor
-    public function __construct(string $nombre,string $apellido,bool $estadoDeBaja,string $tipoDocumento,int $documento )
+    public function __construct(
+        string $nombre,
+        string $apellido,
+        bool $estadoDeBaja,
+        string $tipoDocumento,
+        int $documento)
     {
         $this->nombre=$nombre;
         $this->apellido=$apellido;
@@ -55,7 +60,10 @@ class Cliente{
     //Metodo toString
     public function __toString()
     {
-        $estadoBaja = $this->getEstadoDeBaja() ? "Si esta dado de baja" : "No esta dado de baja";
+        //Verificar si esta de baja
+        $estadoBaja = $this->getEstadoDeBaja() ? 
+        "Si está dado de baja" : "No está dado de baja";
+
         return "Nombre: " . $this->getNombre().
         "\nApellido: " . $this->getApellido().
         "Estado de baja: " . $estadoBaja.
