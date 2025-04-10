@@ -93,4 +93,25 @@ class Empresa{
         }
         return null;
     }
+
+    /** Metodo que retorna las ventas realizaas al cliente
+     * @param string $tipo
+     * @param int $numDoc
+     * @return array/string
+     */
+    public function retornarVentasXCliente($tipo,$numDoc){
+        $ventasCliente = [];
+
+    foreach ($this->getVentasHechas() as $venta) {
+        $cliente = $venta->getCliente();
+        if ($cliente->getTipoDocumento() == $tipo && $cliente->getDocumento() == $numDoc) {
+            $ventasCliente[] = $venta;
+        }
+        }
+        if (count($ventasCliente) > 0) {
+            return $ventasCliente;
+        } else {
+            return "No se han realizado ventas a este cliente.";
+        }
+    }
 }
