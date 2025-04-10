@@ -80,7 +80,7 @@ class Venta{
             $this->setColeccionMotos($arrayMoto);
 
             //Modificar el precio final
-            $precioModifi=$objMoto->darPrecioVenta();
+            $precioModifi=$this->getPrecioFinal() + $objMoto->darPrecioVenta();
             $this->setPrecioFinal($precioModifi); 
         }
         return $this->getColeccionMotos();
