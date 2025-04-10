@@ -90,7 +90,9 @@ class Moto{
         self::$anio = $nuevoAnio;
     }
 
-    //Metodo para precio de moto
+    /** Metodo para dar el precio de venta de la moto
+     * @return float
+     */
     public function darPrecioVenta(){
         $aniosTranscurridos = self::$anio-$this->getAnioFabricacion();
         if($this->getActiva()==false){

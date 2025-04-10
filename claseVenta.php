@@ -72,6 +72,10 @@ class Venta{
         "Precio final: " . $this->getPrecioFinal();
     }
 
+    /** Metodo que agregar una moto a la coleccion y la retorna
+     * @param obj $objMoto
+     * @return array
+     */
     public function incorporarMoto($objMoto){
         if($objMoto->darPrecioVenta()!=0){
             //Agregar el obj moto a la colección
