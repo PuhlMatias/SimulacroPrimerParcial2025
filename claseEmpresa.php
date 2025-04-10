@@ -57,30 +57,6 @@ class Empresa{
         $this->ventasHechas=$ventasHechas;
     }
 
-    //Metodo toString
-    public function __toString()
-    {
-        $infoClientes = "";
-        foreach ($this->getClientes() as $cliente) {
-            $infoClientes .= $cliente . "\n";
-        }
-    
-        $infoMotos = "";
-        foreach ($this->getMotos() as $moto) {
-            $infoMotos .= $moto . "\n";
-        }
-    
-        $infoVentas = "";
-        foreach ($this->getVentasHechas() as $venta) {
-            $infoVentas .= $venta . "\n";
-        }
-        return "\nDenominación: " . $this->getDenominacion().
-        "\nDirección: " . $this->getDireccion().
-        "\nClientes: ". $infoClientes.
-        "\nMotos: " . $infoMotos.
-        "\nVentas realizadas: ". $infoVentas;
-    }
-
     /** Metodo que retorna el obj moto que coincide con el codigoMoto
      * @param int $codigoMoto
      * @return objMoto/null
@@ -125,5 +101,29 @@ class Empresa{
             $ventas = "No se han realizado ventas a este cliente.";
         }
         return $ventas;
+    }
+
+    //Metodo toString
+    public function __toString()
+    {
+        $infoClientes = "";
+        foreach ($this->getClientes() as $cliente) {
+            $infoClientes .= $cliente . "\n";
+        }
+    
+        $infoMotos = "";
+        foreach ($this->getMotos() as $moto) {
+            $infoMotos .= $moto . "\n";
+        }
+    
+        $infoVentas = "";
+        foreach ($this->getVentasHechas() as $venta) {
+            $infoVentas .= $venta . "\n";
+        }
+        return "\nDenominación: " . $this->getDenominacion().
+        "\nDirección: " . $this->getDireccion().
+        "\nClientes: ". $infoClientes.
+        "\nMotos: " . $infoMotos.
+        "\nVentas realizadas: ". $infoVentas;
     }
 }

@@ -3,7 +3,7 @@ class Cliente{
     //Atributos
     private string $nombre;
     private string $apellido;
-    private bool $estadoDeBaja;
+    private string $estadoDeBaja;
     private string $tipoDocumento;
     private int $documento;
 
@@ -11,7 +11,7 @@ class Cliente{
     public function __construct(
         string $nombre,
         string $apellido,
-        bool $estadoDeBaja,
+        string $estadoDeBaja,
         string $tipoDocumento,
         int $documento)
     {
@@ -47,7 +47,7 @@ class Cliente{
     public function setApellido(string $apellido){
         $this->apellido=$apellido;
     }
-    public function setEstadoDeBaja(bool $estadoDeBaja){
+    public function setEstadoDeBaja(string $estadoDeBaja){
         $this->estadoDeBaja=$estadoDeBaja;
     }
     public function setTipoDocumento(string $tipoDocumento){
@@ -60,13 +60,9 @@ class Cliente{
     //Metodo toString
     public function __toString()
     {
-        //Verificar si esta de baja
-        $estadoBaja = $this->getEstadoDeBaja() ? 
-        "Si está dado de baja" : "No está dado de baja";
-
         return "Nombre: " . $this->getNombre().
         "\nApellido: " . $this->getApellido().
-        "\nEstado de baja: " . $estadoBaja.
+        "\nEstado de baja: " . $this->getEstadoDeBaja().
         "\nTipo de documento: " . $this->getTipoDocumento().
         "\nDocumento: " . $this->getDocumento();
     }
