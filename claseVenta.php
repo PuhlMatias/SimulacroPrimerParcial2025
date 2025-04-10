@@ -65,15 +65,15 @@ class Venta{
             $infoMotos .= $moto . "\n";
         }
 
-        return "Número de venta: " . $this->getNumero().
-        "Fecha: " . $this->getFecha().
-        "Información del cliente: ". $this->getCliente().
-        "Motos: ". $infoMotos .
-        "Precio final: " . $this->getPrecioFinal();
+        return "\nNúmero de venta: " . $this->getNumero().
+        "\nFecha: " . $this->getFecha().
+        "\nInformación del cliente: ". $this->getCliente().
+        "\nMotos: ". $infoMotos .
+        "\nPrecio final: " . $this->getPrecioFinal();
     }
 
     /** Metodo que agregar una moto a la coleccion y la retorna
-     * @param obj $objMoto
+     * @param Moto $objMoto
      * @return array
      */
     public function incorporarMoto($objMoto){

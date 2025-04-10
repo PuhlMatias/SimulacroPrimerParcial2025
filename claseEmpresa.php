@@ -72,13 +72,31 @@ class Empresa{
         return $motoEncontrada;
     }
 
-    /**
-     * @param array $colCodigosMoto
-     * @param obj $objMotos
-     */
-    public function registrarVenta($colCodigosMoto, $objCliente){
-
+/**
+* Método que registra una venta a un cliente con una colección de códigos de moto.
+* @param array $colCodigosMoto
+* @param Cliente $objCliente
+* @return float
+*/
+public function registrarVenta($colCodigosMoto, $objCliente) {
+    $motosAVender = [];
+    $precioFinal = 0;
+    
+    foreach ($colCodigosMoto as $codigo) {
+        $moto = $this->retornarMoto($codigo);
+        if ($moto !== null && $moto->getActiva()) {
+            $motosAVender[] = $moto;
+            $precioFinal += $moto->darPrecioVenta();
+        }
     }
+    if (count($motosAVender) > 0) {
+        $nuevaVenta = new Venta(count($this->ventasHechas) + 1,"10/04/2025", $objCliente, $motosAVender, $precioFinal);
+        $this->ventasHechas[] = $nuevaVenta;
+        return $precioFinal;
+    } else {
+        return 0; // No se pudo concretar ninguna venta
+    }
+}
 
     /** Metodo que retorna las ventas realizaas al cliente
      * @param string $tipo

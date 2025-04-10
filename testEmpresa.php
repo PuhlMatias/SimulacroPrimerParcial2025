@@ -15,7 +15,7 @@ $objMoto3 = new Moto(13,999900,2023,"Zanella Patagonian Eagle 250",55,false);
 
 //Creamos arreglos con las motos y otro con los clientes
 $coleccionDeClientes = [$objCliente1, $objCliente2];
-$coleccionDeMotos =  [$obMoto1, $obMoto2, $obMoto3];
+$coleccionDeMotos =  [$objMoto1, $objMoto2, $objMoto3];
 
 //Creamos un objEmpresa
 $objEmpresa = new Empresa ("Alta Gama","Av Argenetina 123",$coleccionDeClientes,
