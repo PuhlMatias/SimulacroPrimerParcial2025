@@ -86,12 +86,22 @@ class Empresa{
      * @return objMoto/null
      */
     public function retornarMoto($codigoMoto) {
-        foreach ($this->getMotos() as $Moto) {
-            if ($Moto->getCodigo() == $codigoMoto) {
-                return $Moto;
+        $motoEncontrada = null;
+        foreach ($this->getMotos() as $moto) {
+            if ($moto->getCodigo() == $codigoMoto) {
+                $motoEncontrada = $moto;
+                break; 
             }
         }
-        return null;
+        return $motoEncontrada;
+    }
+
+    /**
+     * @param array $colCodigosMoto
+     * @param obj $objMotos
+     */
+    public function registrarVenta($colCodigosMoto, $objCliente){
+
     }
 
     /** Metodo que retorna las ventas realizaas al cliente
@@ -102,16 +112,18 @@ class Empresa{
     public function retornarVentasXCliente($tipo,$numDoc){
         $ventasCliente = [];
 
-    foreach ($this->getVentasHechas() as $venta) {
+    foreach ($this->getVentasHechas() as $venta){
         $cliente = $venta->getCliente();
-        if ($cliente->getTipoDocumento() == $tipo && $cliente->getDocumento() == $numDoc) {
+        if ($cliente->getTipoDocumento() == $tipo && 
+        $cliente->getDocumento() == $numDoc){
             $ventasCliente[] = $venta;
         }
         }
         if (count($ventasCliente) > 0) {
-            return $ventasCliente;
-        } else {
-            return "No se han realizado ventas a este cliente.";
+            $ventas = $ventasCliente;
+        }else{
+            $ventas = "No se han realizado ventas a este cliente.";
         }
+        return $ventas;
     }
 }
