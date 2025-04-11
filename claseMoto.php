@@ -1,24 +1,21 @@
 <?php
 class Moto{
-    // propiedad modificable
-    public static $anio = 2025;
-
     //Atributos
-    private int $codigo;
-    private float $costo;
-    private int $anioFabricacion;
-    private string $descripcion;
-    private float $incrementoAnual;
-    private bool $activa;
+    private $codigo;
+    private $costo;
+    private $anioFabricacion;
+    private $descripcion;
+    private $incrementoAnual;
+    private $activa;
 
     //Metodo constructor
     public function __construct(
-        int $codigo,
-        float $costo,
-        int $anioFabricacion,
-        string $descripcion,
-        float $incrementoAnual,
-        bool $activa)
+        $codigo,
+        $costo,
+        $anioFabricacion,
+        $descripcion,
+        $incrementoAnual,
+        $activa)
     {
         $this->codigo=$codigo;
         $this->costo=$costo;
@@ -50,22 +47,22 @@ class Moto{
     }
 
     //setters
-    public function setCodigo(int $codigo){
+    public function setCodigo($codigo){
         $this->codigo=$codigo;
     }
-    public function setCosto(float $costo){
+    public function setCosto($costo){
         $this->costo=$costo;
     }
-    public function setAnioFabricacion(int $anioFabricacion){
+    public function setAnioFabricacion($anioFabricacion){
         $this->anioFabricacion=$anioFabricacion;
     }
-    public function setDescripcion(string $descripcion){
+    public function setDescripcion($descripcion){
         $this->descripcion=$descripcion;
     }
-    public function setIncrementoAnual(float $incrementoAnual){
+    public function setIncrementoAnual($incrementoAnual){
         $this->incrementoAnual=$incrementoAnual;
     }
-    public function setActiva(bool $activa){
+    public function setActiva($activa){
         $this->activa=$activa;
     }
 
@@ -85,18 +82,14 @@ class Moto{
         "\nActiva: ". $disponibilidad;
     }
     
-    //Cambiar de año si es necesario
-    public static function cambiarAnio($nuevoAnio) {
-        self::$anio = $nuevoAnio;
-    }
-
     /** Metodo para dar el precio de venta de la moto
      * @return float
      */
     public function darPrecioVenta(){
-        $aniosTranscurridos = self::$anio-$this->getAnioFabricacion();
+        $anio = date("Y");
+        $aniosTranscurridos = $anio-$this->getAnioFabricacion();
         if($this->getActiva()==false){
-            $venta = 0;
+            $venta = -1;
         }else{
             $venta = $this->getCosto()+$this->getCosto()*
             ($aniosTranscurridos*$this->getIncrementoAnual());

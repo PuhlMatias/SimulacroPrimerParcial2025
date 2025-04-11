@@ -1,19 +1,19 @@
 <?php
 class Empresa{
     //Atributos
-    private string $denominacion;
-    private string $direccion;
-    private array $clientes; //Obj cliente
-    private array $motos; //Obj motos
-    private array $ventasHechas; //Obj ventas
+    private $denominacion;
+    private $direccion;
+    private $clientes; // array cliente
+    private $motos; // array motos
+    private $ventasHechas; // array ventas
 
     //Metodo constructor
     public function __construct(
-        string $denominacion,
-        string $direccion,
-        array $clientes,
-        array $motos,
-        array $ventasHechas)
+        $denominacion,
+        $direccion,
+        $clientes,
+        $motos,
+        $ventasHechas)
     {
         $this->denominacion=$denominacion;
         $this->direccion=$direccion;
@@ -41,19 +41,19 @@ class Empresa{
     }
 
     //setters
-    public function setDenominacion(string $denominacion){
+    public function setDenominacion($denominacion){
         $this->denominacion=$denominacion;
     }
-    public function setDireccion(string $direccion){
+    public function setDireccion($direccion){
         $this->direccion=$direccion;
     }
-    public function setClientes(array $clientes){
+    public function setClientes($clientes){
         $this->clientes=$clientes;
     }
-    public function setMotos(array $motos){
+    public function setMotos($motos){
         $this->motos=$motos;
     }
-    public function setVentasHechas(array $ventasHechas){
+    public function setVentasHechas($ventasHechas){
         $this->ventasHechas=$ventasHechas;
     }
 
@@ -63,11 +63,16 @@ class Empresa{
      */
     public function retornarMoto($codigoMoto) {
         $motoEncontrada = null;
-        foreach ($this->getMotos() as $moto) {
-            if ($moto->getCodigo() == $codigoMoto) {
-                $motoEncontrada = $moto;
-                break; 
+        $contador = count($this->getMotos());
+        $encontrado = false;
+        $i = 0;
+        $motos = $this->getMotos();
+        while($i < $contador && !$encontrado){
+            if ($motos[$i]->getCodigo() == $codigoMoto) {
+                $motoEncontrada = $motos[$i];
+                $encontrado = true;
             }
+            $i++;
         }
         return $motoEncontrada;
     }
@@ -84,18 +89,21 @@ public function registrarVenta($colCodigosMoto, $objCliente) {
     
     foreach ($colCodigosMoto as $codigo) {
         $moto = $this->retornarMoto($codigo);
-        if ($moto !== null && $moto->getActiva()) {
+        if ($moto != null && $moto->getActiva()) {
             $motosAVender[] = $moto;
             $precioFinal += $moto->darPrecioVenta();
         }
     }
     if (count($motosAVender) > 0) {
-        $nuevaVenta = new Venta(count($this->ventasHechas) + 1,"10/04/2025", $objCliente, $motosAVender, $precioFinal);
-        $this->ventasHechas[] = $nuevaVenta;
-        return $precioFinal;
-    } else {
-        return 0; // No se pudo concretar ninguna venta
-    }
+        $nuevaVenta = new Venta(count($this->getVentasHechas()) + 1,"10/04/2025", $objCliente,);
+        $ventasReali = $this->getVentasHechas();
+        $ventasReali[]= $nuevaVenta;
+        foreach($colCodigosMoto as $unaMoto){
+            $nuevaVenta->incorporarMoto($unaMoto);
+        }
+        $precioFinal = $nuevaVenta->getPrecioFinal();
+    } 
+    return $precioFinal;
 }
 
     /** Metodo que retorna las ventas realizaas al cliente
@@ -108,17 +116,11 @@ public function registrarVenta($colCodigosMoto, $objCliente) {
 
     foreach ($this->getVentasHechas() as $venta){
         $cliente = $venta->getCliente();
-        if ($cliente->getTipoDocumento() == $tipo && 
-        $cliente->getDocumento() == $numDoc){
+        if ($cliente->getTipoDocumento() == $tipo && $cliente->getDocumento() == $numDoc){
             $ventasCliente[] = $venta;
         }
         }
-        if (count($ventasCliente) > 0) {
-            $ventas = $ventasCliente;
-        }else{
-            $ventas = "No se han realizado ventas a este cliente.";
-        }
-        return $ventas;
+        return $ventasCliente;
     }
 
     //Metodo toString

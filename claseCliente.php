@@ -1,19 +1,19 @@
 <?php
 class Cliente{
     //Atributos
-    private string $nombre;
-    private string $apellido;
-    private string $estadoDeBaja;
-    private string $tipoDocumento;
-    private int $documento;
+    private $nombre;
+    private $apellido;
+    private $estadoDeBaja;
+    private $tipoDocumento;
+    private $documento;
 
     //Metodo constructor
     public function __construct(
-        string $nombre,
-        string $apellido,
-        string $estadoDeBaja,
-        string $tipoDocumento,
-        int $documento)
+        $nombre,
+        $apellido,
+        $estadoDeBaja,
+        $tipoDocumento,
+        $documento)
     {
         $this->nombre=$nombre;
         $this->apellido=$apellido;
@@ -41,19 +41,19 @@ class Cliente{
     }
 
     //setters
-    public function setNombre(string $nombre){
+    public function setNombre($nombre){
         $this->nombre=$nombre;
     }
-    public function setApellido(string $apellido){
+    public function setApellido($apellido){
         $this->apellido=$apellido;
     }
-    public function setEstadoDeBaja(string $estadoDeBaja){
+    public function setEstadoDeBaja($estadoDeBaja){
         $this->estadoDeBaja=$estadoDeBaja;
     }
-    public function setTipoDocumento(string $tipoDocumento){
+    public function setTipoDocumento($tipoDocumento){
         $this->tipoDocumento=$tipoDocumento;
     }
-    public function setDucumento(int $documento){
+    public function setDucumento($documento){
         $this->documento=$documento;
     }
 

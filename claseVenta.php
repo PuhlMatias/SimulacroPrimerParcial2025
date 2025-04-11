@@ -1,25 +1,24 @@
 <?php
 class Venta{
     //Atributos
-    private int $numero;
-    private string $fecha;
+    private $numero;
+    private $fecha;
     private $cliente; //Referencia Obj cliente
     private $coleccionMotos; //Array de motos
-    private float $precioFinal;
+    private $precioFinal;
 
     //Metodo constructor
     public function __construct(
-        int $numero,
-        string $fecha,
+        $numero,
+        $fecha,
         $cliente,
-        $coleccionMotos,
-        float $precioFinal)
+        )
     {
         $this->numero=$numero;
         $this->fecha=$fecha;
         $this->cliente=$cliente;
         $this->coleccionMotos=[];
-        $this->precioFinal=$precioFinal;
+        $this->precioFinal=0;
     }
 
     //METODOS DE ACCESO
@@ -41,10 +40,10 @@ class Venta{
     }
 
     //setters
-    public function setNumero(int $numero){
+    public function setNumero($numero){
         $this->numero=$numero;
     }
-    public function setFecha(string $fecha){
+    public function setFecha($fecha){
         $this->fecha=$fecha;
     }
     public function setReferenciaCliente($cliente){
@@ -53,7 +52,7 @@ class Venta{
     public function setColeccionMotos($coleccionMotos){
         $this->coleccionMotos = $coleccionMotos;
     }
-    public function setPrecioFinal(float $precioFinal){
+    public function setPrecioFinal($precioFinal){
         $this->precioFinal=$precioFinal;
     }
 
@@ -77,17 +76,22 @@ class Venta{
      * @return array
      */
     public function incorporarMoto($objMoto){
-        if($objMoto->darPrecioVenta()!=0){
-            //Agregar el obj moto a la colección
-            $arrayMoto = $this->getColeccionMotos();
-            $arrayMoto[] = $objMoto;
-            $this->setColeccionMotos($arrayMoto);
-
-            //Modificar el precio final
-            $precioModifi=$this->getPrecioFinal() + $objMoto->darPrecioVenta();
-            $this->setPrecioFinal($precioModifi); 
+        $retorno = false;
+        $activa = $objMoto->getActiva();
+        if ($activa)
+        {
+            // Guardo la moto que entra en un array
+            $coleccion = $this->getColeccionMotos(); # Obtengo 
+            $coleccion[] = $objMoto; # Almaceno
+            $this->setColeccionMotos($coleccion); # Modifico
+            // Actualizacion de la variable precioFinal con la funcion darPrecioVenta
+            $precioMoto = $objMoto->darPrecioVenta(); # Obtengo el precio de venta
+            $precio = $this->getPrecioFinal(); # Obtengo el precio final
+            $this->setPrecioFinal($precio + $precioMoto); # Actualizo el precio final
+            $retorno = true;
         }
-        return $this->getColeccionMotos();
+        return $retorno;
+
     }
 
 }
