@@ -25,21 +25,21 @@ $coleccionDeMotos,$ventasRealizadas=[]);
 $colCodigosMoto =  [11,12,13];
 //Invocamos el metodo registrarVenta y lo mostramos 
 $registroDeVenta = $objEmpresa->registrarVenta($colCodigosMoto,$objCliente2);
-echo $registroDeVenta . "\n";
+
 
 
 //Creamos una coleccion de codigos
 $colCodigosMoto2 =  [0];
 //Invocamos el metodo registrarVenta y lo mostramos 
 $registroDeVenta2 = $objEmpresa->registrarVenta($colCodigosMoto2,$objCliente2);
-echo $registroDeVenta2 . "\n";
+
 
 
 //Creamos una coleccion de codigos
 $colCodigosMoto3 =  [2];
 //Invocamos el metodo registrarVenta y lo mostramos 
 $registroDeVenta3 = $objEmpresa->registrarVenta($colCodigosMoto3,$objCliente2);
-echo $registroDeVenta3 . "\n";
+
 
 //Invocamos el metodo de retornarVentasXCliente
 $ventasPorCliente = $objEmpresa->retornarVentasXCliente("DNI",46257237);

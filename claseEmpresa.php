@@ -105,7 +105,7 @@ public function registrarVenta($colCodigosMoto, $objCliente) {
 
 
 public function retornarVentasXCliente($tipo,$numDoc){
-        $colVentasCliente = [];
+        $colVentasCliente = array();
         $colVenta = $this->getVentasHechas();
 
     foreach ($colVenta as $venta){
