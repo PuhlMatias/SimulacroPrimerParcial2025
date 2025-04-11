@@ -60,10 +60,12 @@ class Cliente{
     //Metodo toString
     public function __toString()
     {
+        $estadoBaja = $this->getEstadoDeBaja() ? "NO esta de baja" : "SI esta de baja";
         return "\nNombre: " . $this->getNombre().
         "\nApellido: " . $this->getApellido().
-        "\nEstado de baja: " . $this->getEstadoDeBaja().
+        "\nEstado de baja: " . $estadoBaja.
         "\nTipo de documento: " . $this->getTipoDocumento().
         "\nDocumento: " . $this->getDocumento();
     }
 }
+?>

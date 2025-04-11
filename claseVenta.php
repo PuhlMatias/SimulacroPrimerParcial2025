@@ -1,10 +1,11 @@
 <?php
+include_once 'moto.php';
 class Venta{
     //Atributos
     private $numero;
     private $fecha;
     private $cliente; //Referencia Obj cliente
-    private $coleccionMotos; //Array de motos
+    private $coleccionMotos; //Referencia Obj motos
     private $precioFinal;
 
     //Metodo constructor
@@ -71,10 +72,6 @@ class Venta{
         "\nPrecio final: " . $this->getPrecioFinal();
     }
 
-    /** Metodo que agregar una moto a la coleccion y la retorna
-     * @param Moto $objMoto
-     * @return array
-     */
     public function incorporarMoto($objMoto){
         $retorno = false;
         $activa = $objMoto->getActiva();
@@ -84,6 +81,7 @@ class Venta{
             $coleccion = $this->getColeccionMotos(); # Obtengo 
             $coleccion[] = $objMoto; # Almaceno
             $this->setColeccionMotos($coleccion); # Modifico
+
             // Actualizacion de la variable precioFinal con la funcion darPrecioVenta
             $precioMoto = $objMoto->darPrecioVenta(); # Obtengo el precio de venta
             $precio = $this->getPrecioFinal(); # Obtengo el precio final
@@ -91,7 +89,7 @@ class Venta{
             $retorno = true;
         }
         return $retorno;
-
     }
 
 }
+?>

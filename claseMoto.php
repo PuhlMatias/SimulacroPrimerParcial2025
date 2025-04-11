@@ -88,12 +88,13 @@ class Moto{
     public function darPrecioVenta(){
         $anio = date("Y");
         $aniosTranscurridos = $anio-$this->getAnioFabricacion();
-        if($this->getActiva()==false){
-            $venta = -1;
-        }else{
+        if($this->getActiva()==true){
             $venta = $this->getCosto()+$this->getCosto()*
             ($aniosTranscurridos*$this->getIncrementoAnual());
+        }else{
+            $venta = -1;
         }
         return $venta;
     }
 }
+?>

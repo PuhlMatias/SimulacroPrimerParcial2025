@@ -1,4 +1,6 @@
 <?php
+include_once 'moto.php';
+include_once 'venta.php';
 class Empresa{
     //Atributos
     private $denominacion;
@@ -57,10 +59,6 @@ class Empresa{
         $this->ventasHechas=$ventasHechas;
     }
 
-    /** Metodo que retorna el obj moto que coincide con el codigoMoto
-     * @param int $codigoMoto
-     * @return objMoto/null
-     */
     public function retornarMoto($codigoMoto) {
         $motoEncontrada = null;
         $contador = count($this->getMotos());
