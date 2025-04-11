@@ -1,5 +1,5 @@
 <?php
-include_once 'moto.php';
+include_once 'claseMoto.php';
 class Venta{
     //Atributos
     private $numero;

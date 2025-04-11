@@ -1,6 +1,6 @@
 <?php
-include_once 'moto.php';
-include_once 'venta.php';
+include_once 'claseMoto.php';
+include_once 'claseVenta.php';
 class Empresa{
     //Atributos
     private $denominacion;
@@ -61,65 +61,63 @@ class Empresa{
 
     public function retornarMoto($codigoMoto) {
         $motoEncontrada = null;
-        $contador = count($this->getMotos());
-        $encontrado = false;
-        $i = 0;
         $motos = $this->getMotos();
-        while($i < $contador && !$encontrado){
-            if ($motos[$i]->getCodigo() == $codigoMoto) {
-                $motoEncontrada = $motos[$i];
+        $cantidad = count($motos);
+        $i = 0;
+        $encontrado = false;
+    
+        while ($i < $cantidad && !$encontrado) {
+            $motoActual = $motos[$i]; // accedo a la moto por índice
+            if ($motoActual->getCodigo() == $codigoMoto) {
+                $motoEncontrada = $motoActual;
                 $encontrado = true;
             }
             $i++;
         }
+    
         return $motoEncontrada;
     }
 
-/**
-* Método que registra una venta a un cliente con una colección de códigos de moto.
-* @param array $colCodigosMoto
-* @param Cliente $objCliente
-* @return float
-*/
 public function registrarVenta($colCodigosMoto, $objCliente) {
-    $motosAVender = [];
-    $precioFinal = 0;
-    
-    foreach ($colCodigosMoto as $codigo) {
-        $moto = $this->retornarMoto($codigo);
-        if ($moto != null && $moto->getActiva()) {
-            $motosAVender[] = $moto;
-            $precioFinal += $moto->darPrecioVenta();
+    $importeFinal = 0;
+    $colMotos = [];
+
+    $objVenta = null;
+    if($objCliente->getEstadoDeBaja()){
+        foreach ($colCodigosMoto as $codigo){
+            $objMoto = $this->retornarMoto($codigo);
+            if($objMoto != null &&  $objMoto->getActiva()){
+                $colMotos[] = $objMoto;
+            }
         }
     }
-    if (count($motosAVender) > 0) {
-        $nuevaVenta = new Venta(count($this->getVentasHechas()) + 1,"10/04/2025", $objCliente,);
-        $ventasReali = $this->getVentasHechas();
-        $ventasReali[]= $nuevaVenta;
-        foreach($colCodigosMoto as $unaMoto){
-            $nuevaVenta->incorporarMoto($unaMoto);
+    if(count($colMotos)>0){
+        $cantVenta = count($this->getVentasHechas());
+        $objVenta = new Venta($cantVenta+1,date("Y"),$objCliente);
+        foreach($colMotos as $unaMoto){
+            $objVenta->incorporarMoto($unaMoto);
         }
-        $precioFinal = $nuevaVenta->getPrecioFinal();
-    } 
-    return $precioFinal;
+        $importeFinal = $objVenta->getPrecioFinal();
+    }
+    return $importeFinal;
 }
 
-    /** Metodo que retorna las ventas realizaas al cliente
-     * @param string $tipo
-     * @param int $numDoc
-     * @return array/string
-     */
-    public function retornarVentasXCliente($tipo,$numDoc){
-        $ventasCliente = [];
 
-    foreach ($this->getVentasHechas() as $venta){
-        $cliente = $venta->getCliente();
-        if ($cliente->getTipoDocumento() == $tipo && $cliente->getDocumento() == $numDoc){
-            $ventasCliente[] = $venta;
+
+public function retornarVentasXCliente($tipo,$numDoc){
+        $colVentasCliente = [];
+        $colVenta = $this->getVentasHechas();
+
+    foreach ($colVenta as $venta){
+        $objCliente = $venta->getCliente();
+
+        if ($objCliente->getTipoDocumento() == $tipo && $objCliente->getDocumento() == $numDoc){
+            $colVentasCliente = array_push($colVentasCliente,$venta);
         }
-        }
-        return $ventasCliente;
     }
+    return $colVentasCliente;
+    }
+
 
     //Metodo toString
     public function __toString()
